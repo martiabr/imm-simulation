@@ -3,26 +3,17 @@ classdef IMM_simulation
     %   Detailed explanation goes here
     
     properties
-        model
-        
-        f
-        Q
-        
-        h
-        R
+        models
     end
     
     methods
-        function obj = IMM_simulation(inputArg1,inputArg2)
-            %IMM_SIMULATION Construct an instance of this class
-            %   Detailed explanation goes here
-            obj.Property1 = inputArg1 + inputArg2;
+        function obj = IMM_simulation(models)
+            obj = obj.setModels(models);
         end
         
-        function outputArg = method1(obj,inputArg)
-            %METHOD1 Summary of this method goes here
-            %   Detailed explanation goes here
-            outputArg = obj.Property1 + inputArg;
+        function obj = setModels(obj, models)
+           % sets the internal functions from model
+           obj.models = models;
         end
     end
 end

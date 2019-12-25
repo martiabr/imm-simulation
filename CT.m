@@ -1,9 +1,9 @@
-function model = CT(q, r)
+function model = CT(q)
     % return a model structure for CT with position measurements that
     % implements the dynamic and measurement function along with their
     % Jacobian, as well as the process and measurement noise.
     % q;    q(1) is acceleration noise covariance.
-    %       q(2) is turn rate noise covariance-
+    %       q(2) is turn rate noise covariance.
     % r;    positional measurement covariance
     model.f = @ f_CT; %f_CT;
     model.Q = @ (x, T) [q(1) * [   T^3/3, 0,      T^2/2,	0;
@@ -11,9 +11,7 @@ function model = CT(q, r)
                     T^2/2, 0,      T,   	0,     ;
                     0,      T^2/2, 0,    	T,    ],   zeros(4,1);
                     zeros(1, 4),                        q(2) * T];
-                
-   model.h = @(x) x(1:2);
-   model.R = @(x) r*eye(2);
+    model.sqrtQ = @(x, T) chol(model.Q(x, T))';
 end
 
 function x = f_CT(x,T)
