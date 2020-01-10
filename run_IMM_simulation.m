@@ -84,3 +84,5 @@ plot(t, x(4, :));
 
 figure(4); clf; hold on; grid on;
 plot(t, s);
+
+% TODO: add animation
