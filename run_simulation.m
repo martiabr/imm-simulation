@@ -1,6 +1,6 @@
 %% Initialization
 
-n = 5;
+n = 7;
 m = 2;
 
 K = 1000;
@@ -9,6 +9,7 @@ t = 0:T:(K-1)*T;
 
 q_cv = 0.001;
 q_ct = [0.005; 0.01];
+q_ca = 0.005;
 q_cvh = 0.5;
 
 r = 0.6;
@@ -16,11 +17,11 @@ r = 0.6;
 models = cell(3,1);
 models{1} = CV(q_cv);
 models{2} = CT(q_ct);
-models{3} = CV(q_cvh);
+models{3} = CA(q_ca);
 
 PI11 = 0.992;
 PI22 = 0.992;
-PI33 = 0.98;
+PI33 = 0.992;
 
 PI = [PI11,         (1 - PI22)/2,   (1 - PI33)/2; 
       (1 - PI11)/2, PI22,           (1 - PI33)/2; 
@@ -30,7 +31,7 @@ h = @(x) x(1:2);
 R = r * eye(2);
 sqrtR = chol(R)';
 
-x0 = [0 0 1 0 0]';
+x0 = [0 0 1 0 0 0 0]';
 s0 = 1;
 
 x = zeros(size(x0, 1), K);
